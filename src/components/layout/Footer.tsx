@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { Instagram, Facebook, Linkedin, Twitter, ArrowUp } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, ArrowUp } from 'lucide-react';
+import logoVimark from '@/assets/logo-vimark.png';
 
 const socialLinks = [
   { icon: Instagram, href: '#', label: 'Instagram' },
   { icon: Facebook, href: '#', label: 'Facebook' },
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
 ];
 
 const footerLinks = [
@@ -31,20 +31,16 @@ export const Footer = () => {
   return (
     <footer className="bg-secondary pt-16 pb-8">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-heading font-bold text-xl">V</span>
-              </div>
-              <div>
-                <span className="font-heading font-bold text-lg text-secondary-foreground">Vimark</span>
-                <span className="text-xs text-secondary-foreground/60 block -mt-1">Comunicação e Marketing</span>
-              </div>
-            </div>
-            <p className="text-secondary-foreground/70 text-sm leading-relaxed mb-6">
-              Criamos marcas fortes, estratégias inteligentes e resultados reais.
+          <div className="lg:col-span-2">
+            <img 
+              src={logoVimark} 
+              alt="Vimark Comunicação e Marketing" 
+              className="h-12 w-auto mb-6 brightness-0 invert"
+            />
+            <p className="text-secondary-foreground/70 text-sm leading-relaxed mb-6 max-w-sm">
+              Criamos marcas fortes, estratégias inteligentes e resultados reais para empresas que desejam crescer no mercado angolano.
             </p>
 
             {/* Social Links */}
@@ -53,7 +49,7 @@ export const Footer = () => {
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  whileHover={{ y: -4, scale: 1.1 }}
+                  whileHover={{ y: -4 }}
                   className="w-10 h-10 bg-secondary-foreground/10 rounded-lg flex items-center justify-center hover:bg-primary transition-colors group"
                   aria-label={social.label}
                 >
@@ -66,7 +62,7 @@ export const Footer = () => {
           {/* Links Columns */}
           {footerLinks.map((column) => (
             <div key={column.title}>
-              <h4 className="font-heading font-semibold text-secondary-foreground mb-4">
+              <h4 className="font-heading font-semibold text-secondary-foreground mb-4 text-sm">
                 {column.title}
               </h4>
               <ul className="space-y-3">
@@ -74,7 +70,7 @@ export const Footer = () => {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-secondary-foreground/70 hover:text-primary transition-colors"
+                      className="text-sm text-secondary-foreground/60 hover:text-primary transition-colors"
                     >
                       {link}
                     </a>
@@ -87,15 +83,15 @@ export const Footer = () => {
 
         {/* Divider */}
         <div className="border-t border-secondary-foreground/10 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-secondary-foreground/60">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-secondary-foreground/50">
               © {new Date().getFullYear()} Vimark Comunicação e Marketing. Todos os direitos reservados.
             </p>
 
             {/* Back to Top */}
             <motion.button
               onClick={scrollToTop}
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -2 }}
               className="flex items-center gap-2 text-sm text-secondary-foreground/60 hover:text-primary transition-colors"
             >
               Voltar ao topo

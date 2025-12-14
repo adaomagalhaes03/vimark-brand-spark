@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 215 50% 12%;
+    --background: 0 0% 100%;
+    --foreground: 215 55% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 50% 12%;
+    --card-foreground: 215 55% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 50% 12%;
+    --popover-foreground: 215 55% 11%;
 
     --primary: 27 95% 48%;
     --primary-foreground: 0 0% 100%;
@@ -21,38 +21,34 @@
     --secondary: 215 55% 11%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 0 0% 54%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 27 95% 48%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 27 100% 95%;
+    --accent-foreground: 27 95% 40%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 27 95% 48%;
 
     --radius: 0.75rem;
 
     /* Custom Vimark tokens */
     --vimark-orange: 27 95% 48%;
+    --vimark-orange-light: 27 100% 95%;
     --vimark-blue: 215 55% 11%;
-    --vimark-blue-deep: 215 70% 8%;
-    --vimark-gray: 0 0% 54%;
-    --vimark-light: 210 40% 98%;
-
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(215 55% 11%) 0%, hsl(215 70% 8%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(27 95% 48%) 0%, hsl(27 100% 55%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    --vimark-gray: 215 15% 45%;
+    --vimark-light: 220 14% 96%;
 
     /* Shadows */
-    --shadow-sm: 0 2px 8px hsl(215 55% 11% / 0.05);
-    --shadow-md: 0 8px 24px hsl(215 55% 11% / 0.1);
-    --shadow-lg: 0 16px 48px hsl(215 55% 11% / 0.15);
-    --shadow-glow: 0 0 40px hsl(27 95% 48% / 0.3);
+    --shadow-sm: 0 2px 8px hsl(215 55% 11% / 0.04);
+    --shadow-md: 0 8px 24px hsl(215 55% 11% / 0.08);
+    --shadow-lg: 0 16px 48px hsl(215 55% 11% / 0.12);
+    --shadow-card: 0 4px 20px hsl(215 55% 11% / 0.06);
+    --shadow-glow: 0 0 40px hsl(27 95% 48% / 0.2);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -65,13 +61,13 @@
   }
 
   .dark {
-    --background: 215 55% 11%;
+    --background: 215 55% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 215 50% 14%;
+    --card: 215 50% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 215 50% 14%;
+    --popover: 215 50% 12%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 27 95% 48%;
@@ -123,29 +119,16 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400;
   }
 
-  .section-dark {
-    @apply bg-secondary text-secondary-foreground;
+  .section-padding {
+    @apply py-20 lg:py-28;
   }
 
-  .section-light {
-    @apply bg-background text-foreground;
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
 
-  .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50 shadow-md;
-  }
-
-  .magnetic-btn {
-    @apply relative overflow-hidden transition-all duration-300;
-  }
-
-  .magnetic-btn::before {
-    content: '';
-    @apply absolute inset-0 bg-primary/20 scale-0 rounded-full transition-transform duration-500;
-  }
-
-  .magnetic-btn:hover::before {
-    @apply scale-150;
+  .feature-icon {
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center bg-accent text-primary;
   }
 }
 
@@ -153,124 +136,33 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-morph {
-    animation: morph 8s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes morph {
-  0%, 100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 20px hsl(27 95% 48% / 0.3);
-  }
-  to {
-    box-shadow: 0 0 40px hsl(27 95% 48% / 0.6);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes countUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.animate-float {
+  animation: float 5s ease-in-out infinite;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
+  animation: slideUp 0.6s ease-out forwards;
 }
 
-.animate-slide-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-slide-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-count {
-  animation: countUp 0.6s ease-out forwards;
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 /* Delay utilities */
@@ -279,9 +171,6 @@
 .delay-300 { animation-delay: 300ms; }
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-.delay-700 { animation-delay: 700ms; }
-.delay-800 { animation-delay: 800ms; }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -293,11 +182,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/50 rounded-full;
+  @apply bg-primary/40 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary;
+  @apply bg-primary/60;
 }
 
 /* Reduced motion */

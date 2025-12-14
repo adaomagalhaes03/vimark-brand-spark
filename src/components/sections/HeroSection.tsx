@@ -1,7 +1,16 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { AnimatedText, MorphingShape, FloatingShape } from '@/components/ui/AnimatedElements';
+import { ArrowRight, Check } from 'lucide-react';
+import heroWoman from '@/assets/hero-woman.png';
+
+const features = [
+  'Gestão de Redes Sociais',
+  'Branding e Identidade Visual',
+  'Marketing Digital',
+  'Campanhas Publicitárias',
+  'Produção Audiovisual',
+  'Consultoria Estratégica',
+];
 
 export const HeroSection = () => {
   const scrollToSection = (href: string) => {
@@ -12,137 +21,132 @@ export const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center bg-secondary overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-hero-pattern opacity-30" />
-      
-      {/* Animated Shapes */}
-      <MorphingShape className="absolute top-20 right-10 w-64 h-64 bg-primary/20 blur-3xl" />
-      <FloatingShape className="absolute bottom-20 left-10 w-48 h-48 bg-primary/10 rounded-full blur-2xl" delay={1} />
-      <FloatingShape className="absolute top-1/3 left-1/4 w-32 h-32 bg-primary/15 rounded-full blur-xl" delay={2} />
-      
-      {/* Geometric Accents */}
-      <motion.div
-        className="absolute top-1/4 right-1/4 w-2 h-2 bg-primary rounded-full"
-        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-1/3 right-1/3 w-3 h-3 bg-primary/50 rounded-full"
-        animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.8, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-      />
+    <section id="hero" className="relative min-h-screen flex items-center bg-background overflow-hidden pt-20">
+      {/* Background decorative elements */}
+      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-accent rounded-full blur-3xl opacity-50" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
 
-      {/* Content */}
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mb-8"
-          >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-primary text-sm font-medium">Agência Premium de Branding</span>
-          </motion.div>
-
-          {/* Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-tight mb-6">
-            <AnimatedText text="Branding, Marketing e Comunicação que" delay={0.2} />
-            <span className="block mt-2">
-              <span className="text-gradient">Transformam Negócios</span>
-            </span>
-          </h1>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            Ajudamos empresas angolanas a construir marcas sólidas, comunicar com impacto e crescer no mercado digital.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Button 
-              variant="hero" 
-              size="xl"
-              onClick={() => scrollToSection('#contact')}
-              className="group"
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <div className="order-2 lg:order-1">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-accent text-accent-foreground rounded-full px-4 py-2 mb-6"
             >
-              Solicitar Consultoria
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              variant="heroOutline" 
-              size="xl"
-              onClick={() => scrollToSection('#projects')}
-              className="group"
-            >
-              <Play className="w-5 h-5" />
-              Ver Projetos
-            </Button>
-          </motion.div>
+              <span className="w-2 h-2 bg-primary rounded-full" />
+              <span className="text-sm font-medium">Agência de Branding & Marketing</span>
+            </motion.div>
 
-          {/* Stats Preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="mt-16 pt-16 border-t border-white/10"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { value: '+50', label: 'Colaboradores' },
-                { value: '+3', label: 'Anos de Experiência' },
-                { value: '+100', label: 'Projetos Realizados' },
-                { value: '+30%', label: 'Crescimento Anual' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="text-3xl md:text-4xl font-heading font-bold text-primary mb-1">
-                    {stat.value}
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-secondary leading-tight mb-6"
+            >
+              Criamos Marcas Fortes e{' '}
+              <span className="text-primary">Resultados Reais</span>
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed"
+            >
+              Ajudamos empresas angolanas a construir marcas sólidas, comunicar com impacto e crescer no mercado digital através de estratégias criativas e inovadoras.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap gap-4 mb-10"
+            >
+              <Button 
+                variant="default" 
+                size="lg"
+                onClick={() => scrollToSection('#contact')}
+                className="group"
+              >
+                Solicitar Consultoria
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => scrollToSection('#about')}
+              >
+                Conhecer Mais
+              </Button>
+            </motion.div>
+
+            {/* Features List */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="grid grid-cols-2 gap-3"
+            >
+              {features.map((feature, index) => (
+                <div key={feature} className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-primary" />
                   </div>
-                  <div className="text-sm text-white/60">{stat.label}</div>
-                </motion.div>
+                  <span className="text-sm text-muted-foreground">{feature}</span>
+                </div>
               ))}
+            </motion.div>
+          </div>
+
+          {/* Right Content - Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="order-1 lg:order-2 relative"
+          >
+            <div className="relative">
+              {/* Main Image */}
+              <div className="relative z-10">
+                <img 
+                  src={heroWoman} 
+                  alt="Profissional de marketing" 
+                  className="w-full max-w-md mx-auto lg:max-w-none rounded-3xl shadow-2xl"
+                />
+              </div>
+
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-accent rounded-full blur-xl" />
+
+              {/* Floating Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="absolute -bottom-6 -left-6 bg-card rounded-2xl p-4 shadow-lg border border-border"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+                    <span className="text-primary-foreground font-bold text-lg">+100</span>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-secondary">Projetos</div>
+                    <div className="text-xs text-muted-foreground">Realizados</div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-primary rounded-full"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
