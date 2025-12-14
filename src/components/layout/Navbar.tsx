@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logoVimark from '@/assets/logo-vimark.png';
 
 const navLinks = [
   { name: 'Início', href: '#hero' },
@@ -18,7 +19,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -37,29 +38,27 @@ export const Navbar = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+        transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-secondary/95 backdrop-blur-lg shadow-lg' 
-            : 'bg-transparent'
+            ? 'bg-background/95 backdrop-blur-md shadow-md py-3' 
+            : 'bg-transparent py-5'
         }`}
       >
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.a
               href="#hero"
               onClick={(e) => { e.preventDefault(); scrollToSection('#hero'); }}
-              className="flex items-center gap-3"
+              className="flex items-center"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-heading font-bold text-xl">V</span>
-              </div>
-              <div className="hidden sm:block">
-                <span className="font-heading font-bold text-lg text-white">Vimark</span>
-                <span className="text-xs text-white/60 block -mt-1">Comunicação e Marketing</span>
-              </div>
+              <img 
+                src={logoVimark} 
+                alt="Vimark Comunicação e Marketing" 
+                className="h-10 md:h-12 w-auto"
+              />
             </motion.a>
 
             {/* Desktop Navigation */}
@@ -69,7 +68,7 @@ export const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                  className="text-white/80 hover:text-primary font-medium text-sm transition-colors relative group"
+                  className="text-foreground/80 hover:text-primary font-medium text-sm transition-colors relative group"
                   whileHover={{ y: -2 }}
                 >
                   {link.name}
@@ -81,7 +80,7 @@ export const Navbar = () => {
             {/* CTA Button */}
             <div className="hidden lg:block">
               <Button 
-                variant="hero" 
+                variant="default" 
                 size="default"
                 onClick={() => scrollToSection('#contact')}
               >
@@ -91,7 +90,7 @@ export const Navbar = () => {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="lg:hidden p-2 text-white"
+              className="lg:hidden p-2 text-foreground"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -104,39 +103,33 @@ export const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-            className="fixed inset-0 z-40 bg-secondary lg:hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-0 top-[72px] z-40 bg-background border-b border-border shadow-lg lg:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8 pt-20">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-white text-2xl font-heading font-semibold hover:text-primary transition-colors"
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-              >
+            <div className="container mx-auto px-4 py-6">
+              <div className="flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+                    className="text-foreground font-medium py-2 hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
                 <Button 
-                  variant="hero" 
+                  variant="default" 
                   size="lg"
+                  className="mt-4"
                   onClick={() => scrollToSection('#contact')}
                 >
                   Solicitar Consultoria
                 </Button>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}
